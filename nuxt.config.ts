@@ -1,3 +1,5 @@
+import { presetIcons } from 'unocss'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -21,7 +23,13 @@ export default defineNuxtConfig({
   },
 
   css: [],
-  modules: ['@nuxt/fonts', 'vuetify-nuxt-module', '@nuxt/eslint'],
+  modules: ['@unocss/nuxt', '@nuxt/fonts', 'vuetify-nuxt-module', '@nuxt/eslint'],
+
+  unocss: {
+    presets: [
+      presetIcons(),
+    ],
+  },
 
   vuetify: {
     moduleOptions: {

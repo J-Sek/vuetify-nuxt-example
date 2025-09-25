@@ -5,4 +5,7 @@ export default defineVuetifyConfiguration({
   theme: {
     defaultTheme: 'dark',
   },
+  icons: {
+    defaultSet: 'unocss-mdi'
+  }
 })
