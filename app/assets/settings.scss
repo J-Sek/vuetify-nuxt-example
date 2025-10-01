@@ -1,10 +1,15 @@
-/**
- * src/styles/settings.scss
- *
- * Configures SASS variables and Vuetify overwrites
- */
-
-// https://vuetifyjs.com/features/sass-variables/`
-// @use 'vuetify/settings' with (
-//   $color-pack: false
-// );
+@use 'vuetify/settings' with (
+  $layers: true,
+  $kbd-font-family: monospace,
+  $code-font-size: .875rem,
+  $card-subtitle-header-padding: 0 0 .125rem,
+  $card-subtitle-white-space: normal,
+  $grid-breakpoints: (
+    'xs': 0,
+    'sm': 400px,
+    'md': 800px,
+    'lg': 1280px,
+    'xl': 1920px,
+    'xxl': 2560px,
+  ),
+);
