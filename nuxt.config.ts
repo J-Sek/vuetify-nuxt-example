@@ -1,8 +1,8 @@
-import { presetIcons } from 'unocss'
+import presetWind4 from "@unocss/preset-wind4";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   ssr: true,
 
@@ -13,22 +13,46 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: ['vuetify'],
+    transpile: ["vuetify"],
   },
 
   vite: {
     ssr: {
-      noExternal: ['vuetify'],
+      noExternal: ["vuetify"],
     },
   },
 
-  css: [],
-  modules: ['@unocss/nuxt', '@nuxt/fonts', 'vuetify-nuxt-module', '@nuxt/eslint'],
+  css: ["assets/main.scss"],
+  modules: [
+    "@unocss/nuxt",
+    "@nuxt/fonts",
+    "vuetify-nuxt-module",
+    "@nuxt/eslint",
+  ],
 
   unocss: {
     presets: [
-      presetIcons(),
+      presetWind4({
+        preflights: {
+          reset: false,
+        },
+        theme: {
+          fontFamily: {
+            sans: "Sen",
+            serif: "sans-serif",
+            mono: "Sometype Mono",
+          },
+        },
+      }),
     ],
+  },
+
+  fonts: {
+    defaults: {
+      weights: [300, 400, 500, 700],
+      styles: ["normal", "italic"],
+      subsets: ["latin"],
+    },
   },
 
   vuetify: {
@@ -44,11 +68,10 @@ export default defineNuxtConfig({
         },
       },
 
-      // /* If customizing sass global variables ($utilities, $reset, $color-pack, $body-font-family, etc) */
-      // disableVuetifyStyles: true,
+      disableVuetifyStyles: true,
       styles: {
-        configFile: 'assets/settings.scss',
+        configFile: "assets/settings.scss",
       },
     },
   },
-})
+});
