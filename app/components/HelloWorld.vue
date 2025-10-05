@@ -4,7 +4,8 @@
       <v-img
         class="mb-4"
         height="150"
-        src="@/assets/logo.png"
+        src="/images/logo.png"
+        alt="Placeholder logo"
       />
 
       <div class="mb-8 text-center">
@@ -14,7 +15,7 @@
 
       <div class="flex flex-wrap gap-3">
         <v-card
-          class="py-4 w-full"
+          class="py-4 sm:pr-[120px] w-full"
           color="surface-variant"
           image="https://cdn.vuetifyjs.com/docs/images/one/create/feature.png"
           rounded="lg"
@@ -25,7 +26,7 @@
           </template>
 
           <template #image>
-            <v-img position="top right" />
+            <v-img class="hidden sm:block my-auto" height="120" position="top right" alt="Hero card supplemental image" />
           </template>
 
           <template #title>
@@ -35,7 +36,7 @@
           </template>
 
           <template #subtitle>
-            <div class="text-subtitle-1">
+            <div class="text-subtitle-1 mt-2 leading-4">
               Change this page by updating <v-code>{{ `<HelloWorld />` }}</v-code> in <v-code>components/HelloWorld.vue</v-code>.
             </div>
           </template>
@@ -44,7 +45,7 @@
         <v-card
           v-for="link in links" :key="link.href"
           :append-icon="mdiArrowTopRight"
-          class="flex-basis-[40%] flex-grow-1 h-[120px] flex items-center [&>.v-card-item]:w-full"
+          class="sm:flex-basis-[40%] flex-grow-1 h-[120px] flex items-center [&>.v-card-item]:w-full"
           color="surface-variant"
           :href="link.href"
           rel="noopener noreferrer"
