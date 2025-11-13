@@ -1,4 +1,5 @@
 import presetWind4 from "@unocss/preset-wind4";
+import * as breakpoints from './app/theme/breakpoints'
 
 const targetDomain = import.meta.env.TARGET_DOMAIN
 const appDescription = 'Boilerplate to kick-start your next project'
@@ -48,9 +49,6 @@ export default defineNuxtConfig({
     },
   },
 
-  build: {
-    transpile: ["vuetify"],
-  },
 
   vite: {
     ssr: {
@@ -72,15 +70,16 @@ export default defineNuxtConfig({
         preflights: {
           reset: false,
         },
-        theme: {
-          fontFamily: {
-            sans: "Sen",
-            serif: "sans-serif",
-            mono: "Sometype Mono",
-          },
-        },
       }),
     ],
+    theme: {
+      font: {
+        sans: "Sen",
+        serif: "sans-serif",
+        mono: "Sometype Mono",
+      },
+      breakpoint: breakpoints.forTailwind,
+    },
   },
 
   fonts: {
@@ -109,5 +108,11 @@ export default defineNuxtConfig({
         configFile: "assets/settings.scss",
       },
     },
+    vuetifyOptions: {
+      display: {
+        mobileBreakpoint: "md",
+        thresholds: breakpoints.forVuetify,
+      },
+    }
   },
 });

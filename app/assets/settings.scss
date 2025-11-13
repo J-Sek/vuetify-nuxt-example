@@ -5,11 +5,19 @@
   $card-subtitle-header-padding: 0 0 .125rem,
   $card-subtitle-white-space: normal,
   $grid-breakpoints: (
+    // repeated in breakpoints.ts and main.scss
     'xs': 0,
     'sm': 400px,
-    'md': 800px,
-    'lg': 1280px,
-    'xl': 1920px,
-    'xxl': 2560px,
+    'md': 840px,
+    'lg': 1145px,
+    'xl': 1545px,
+    'xxl': 2138px,
+  ),
+  $container-max-widths: (
+    // manually calculated (optional after https://github.com/vuetifyjs/vuetify/pull/19759)
+    'md': 700px,
+    'lg': 1000px,
+    'xl': 1400px,
+    'xxl': 2000px,
   ),
 );
