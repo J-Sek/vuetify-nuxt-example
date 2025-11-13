@@ -13,7 +13,7 @@ importers:
         version: 1.9.0(@typescript-eslint/utils@8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2))(@vue/compiler-sfc@3.5.22)(eslint@9.36.0(jiti@2.6.0))(magicast@0.3.5)(typescript@5.9.2)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
       '@unocss/nuxt':
         specifier: ^66.5.2
-        version: 66.5.2(magicast@0.3.5)(postcss@8.5.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(webpack@5.101.3(esbuild@0.23.1))
+        version: 66.5.2(magicast@0.3.5)(postcss@8.5.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(webpack@5.101.3(esbuild@0.25.10))
       eslint:
         specifier: ^9.36.0
         version: 9.36.0(jiti@2.6.0)
@@ -27,8 +27,8 @@ importers:
         specifier: ^4.5.1
         version: 4.5.1(vue@3.5.22(typescript@5.9.2))
       vuetify:
-        specifier: ^3.9.1
-        version: 3.10.3(typescript@5.9.2)(vite-plugin-vuetify@2.1.2)(vue@3.5.22(typescript@5.9.2))
+        specifier: ^3.10.10
+        version: 3.10.10(typescript@5.9.2)(vite-plugin-vuetify@2.1.2)(vue@3.5.22(typescript@5.9.2))
     devDependencies:
       '@mdi/js':
         specifier: ^7.4.47
@@ -47,7 +47,7 @@ importers:
         version: 5.9.2
       unocss:
         specifier: ^66.5.2
-        version: 66.5.2(@unocss/webpack@66.5.2(webpack@5.101.3(esbuild@0.23.1)))(postcss@8.5.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
+        version: 66.5.2(@unocss/webpack@66.5.2(webpack@5.101.3(esbuild@0.25.10)))(postcss@8.5.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
       vue-tsc:
         specifier: ^3.0.1
         version: 3.0.8(typescript@5.9.2)
@@ -4498,8 +4498,8 @@ packages:
   vuetify-nuxt-module@0.18.7:
     resolution: {integrity: sha512-AEP5DRuyY5yIk8JzPEhG6NohCkGwf9afn4Mv51YPKGxreqP/KfzL0jooG/HN1cinSo4c+9uRowHllzCsnSN7FA==}
 
-  vuetify@3.10.3:
-    resolution: {integrity: sha512-psc7oZfjz3LwH96ZRzSm4iGcOKKoeoVZIyO5Q5xO4vcUfWYxobL7TvMQv53jv1PnNvaMIXWeVIrQmiyce5dpTg==}
+  vuetify@3.10.10:
+    resolution: {integrity: sha512-4RRQrJCaiWRalciBVpIKuZmPlfGUGwJalXuca8nHVNTDKJq4LHYNLcIKEbfdyP/6VBiWG4jZPJDTmC0dpXu+sA==}
     peerDependencies:
       typescript: '>=4.7'
       vite-plugin-vuetify: '>=2.1.0'
@@ -6127,7 +6127,7 @@ snapshots:
       sirv: 3.0.2
       vue-flow-layout: 0.2.0
 
-  '@unocss/nuxt@66.5.2(magicast@0.3.5)(postcss@8.5.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(webpack@5.101.3(esbuild@0.23.1))':
+  '@unocss/nuxt@66.5.2(magicast@0.3.5)(postcss@8.5.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(webpack@5.101.3(esbuild@0.25.10))':
     dependencies:
       '@nuxt/kit': 4.1.2(magicast@0.3.5)
       '@unocss/config': 66.5.2
@@ -6141,8 +6141,8 @@ snapshots:
       '@unocss/preset-wind4': 66.5.2
       '@unocss/reset': 66.5.2
       '@unocss/vite': 66.5.2(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
-      '@unocss/webpack': 66.5.2(webpack@5.101.3(esbuild@0.23.1))
-      unocss: 66.5.2(@unocss/webpack@66.5.2(webpack@5.101.3(esbuild@0.23.1)))(postcss@8.5.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
+      '@unocss/webpack': 66.5.2(webpack@5.101.3(esbuild@0.25.10))
+      unocss: 66.5.2(@unocss/webpack@66.5.2(webpack@5.101.3(esbuild@0.25.10)))(postcss@8.5.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
     transitivePeerDependencies:
       - magicast
       - postcss
@@ -6255,7 +6255,7 @@ snapshots:
       unplugin-utils: 0.3.0
       vite: 7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)
 
-  '@unocss/webpack@66.5.2(webpack@5.101.3(esbuild@0.23.1))':
+  '@unocss/webpack@66.5.2(webpack@5.101.3(esbuild@0.25.10))':
     dependencies:
       '@jridgewell/remapping': 2.3.5
       '@unocss/config': 66.5.2
@@ -6266,7 +6266,7 @@ snapshots:
       tinyglobby: 0.2.15
       unplugin: 2.3.10
       unplugin-utils: 0.3.0
-      webpack: 5.101.3(esbuild@0.23.1)
+      webpack: 5.101.3(esbuild@0.25.10)
       webpack-sources: 3.3.3
 
   '@unrs/resolver-binding-android-arm-eabi@1.11.1':
@@ -6516,11 +6516,11 @@ snapshots:
 
   '@vue/shared@3.5.22': {}
 
-  '@vuetify/loader-shared@2.1.1(vue@3.5.22(typescript@5.9.2))(vuetify@3.10.3)':
+  '@vuetify/loader-shared@2.1.1(vue@3.5.22(typescript@5.9.2))(vuetify@3.10.10)':
     dependencies:
       upath: 2.0.1
       vue: 3.5.22(typescript@5.9.2)
-      vuetify: 3.10.3(typescript@5.9.2)(vite-plugin-vuetify@2.1.2)(vue@3.5.22(typescript@5.9.2))
+      vuetify: 3.10.10(typescript@5.9.2)(vite-plugin-vuetify@2.1.2)(vue@3.5.22(typescript@5.9.2))
 
   '@webassemblyjs/ast@1.14.1':
     dependencies:
@@ -9119,16 +9119,16 @@ snapshots:
       minizlib: 3.1.0
       yallist: 5.0.0
 
-  terser-webpack-plugin@5.3.14(esbuild@0.23.1)(webpack@5.101.3(esbuild@0.23.1)):
+  terser-webpack-plugin@5.3.14(esbuild@0.25.10)(webpack@5.101.3(esbuild@0.25.10)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
       schema-utils: 4.3.2
       serialize-javascript: 6.0.2
       terser: 5.44.0
-      webpack: 5.101.3(esbuild@0.23.1)
+      webpack: 5.101.3(esbuild@0.25.10)
     optionalDependencies:
-      esbuild: 0.23.1
+      esbuild: 0.25.10
 
   terser@5.44.0:
     dependencies:
@@ -9265,7 +9265,7 @@ snapshots:
       unplugin: 2.3.10
       unplugin-utils: 0.3.0
 
-  unocss@66.5.2(@unocss/webpack@66.5.2(webpack@5.101.3(esbuild@0.23.1)))(postcss@8.5.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)):
+  unocss@66.5.2(@unocss/webpack@66.5.2(webpack@5.101.3(esbuild@0.25.10)))(postcss@8.5.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)):
     dependencies:
       '@unocss/astro': 66.5.2(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
       '@unocss/cli': 66.5.2
@@ -9287,7 +9287,7 @@ snapshots:
       '@unocss/transformer-variant-group': 66.5.2
       '@unocss/vite': 66.5.2(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
     optionalDependencies:
-      '@unocss/webpack': 66.5.2(webpack@5.101.3(esbuild@0.23.1))
+      '@unocss/webpack': 66.5.2(webpack@5.101.3(esbuild@0.25.10))
       vite: 7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)
     transitivePeerDependencies:
       - postcss
@@ -9490,14 +9490,14 @@ snapshots:
       vite: 7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)
       vue: 3.5.22(typescript@5.9.2)
 
-  vite-plugin-vuetify@2.1.2(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(vue@3.5.22(typescript@5.9.2))(vuetify@3.10.3):
+  vite-plugin-vuetify@2.1.2(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(vue@3.5.22(typescript@5.9.2))(vuetify@3.10.10):
     dependencies:
-      '@vuetify/loader-shared': 2.1.1(vue@3.5.22(typescript@5.9.2))(vuetify@3.10.3)
+      '@vuetify/loader-shared': 2.1.1(vue@3.5.22(typescript@5.9.2))(vuetify@3.10.10)
       debug: 4.4.3
       upath: 2.0.1
       vite: 7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)
       vue: 3.5.22(typescript@5.9.2)
-      vuetify: 3.10.3(typescript@5.9.2)(vite-plugin-vuetify@2.1.2)(vue@3.5.22(typescript@5.9.2))
+      vuetify: 3.10.10(typescript@5.9.2)(vite-plugin-vuetify@2.1.2)(vue@3.5.22(typescript@5.9.2))
     transitivePeerDependencies:
       - supports-color
 
@@ -9573,8 +9573,8 @@ snapshots:
       ufo: 1.6.1
       unconfig: 0.5.5
       upath: 2.0.1
-      vite-plugin-vuetify: 2.1.2(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(vue@3.5.22(typescript@5.9.2))(vuetify@3.10.3)
-      vuetify: 3.10.3(typescript@5.9.2)(vite-plugin-vuetify@2.1.2)(vue@3.5.22(typescript@5.9.2))
+      vite-plugin-vuetify: 2.1.2(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(vue@3.5.22(typescript@5.9.2))(vuetify@3.10.10)
+      vuetify: 3.10.10(typescript@5.9.2)(vite-plugin-vuetify@2.1.2)(vue@3.5.22(typescript@5.9.2))
     transitivePeerDependencies:
       - magicast
       - supports-color
@@ -9583,12 +9583,12 @@ snapshots:
       - vue
       - webpack-plugin-vuetify
 
-  vuetify@3.10.3(typescript@5.9.2)(vite-plugin-vuetify@2.1.2)(vue@3.5.22(typescript@5.9.2)):
+  vuetify@3.10.10(typescript@5.9.2)(vite-plugin-vuetify@2.1.2)(vue@3.5.22(typescript@5.9.2)):
     dependencies:
       vue: 3.5.22(typescript@5.9.2)
     optionalDependencies:
       typescript: 5.9.2
-      vite-plugin-vuetify: 2.1.2(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(vue@3.5.22(typescript@5.9.2))(vuetify@3.10.3)
+      vite-plugin-vuetify: 2.1.2(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(sass-embedded@1.93.2)(sass@1.93.2)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(vue@3.5.22(typescript@5.9.2))(vuetify@3.10.10)
 
   watchpack@2.4.4:
     dependencies:
@@ -9601,7 +9601,7 @@ snapshots:
 
   webpack-virtual-modules@0.6.2: {}
 
-  webpack@5.101.3(esbuild@0.23.1):
+  webpack@5.101.3(esbuild@0.25.10):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.8
@@ -9625,7 +9625,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 4.3.2
       tapable: 2.2.3
-      terser-webpack-plugin: 5.3.14(esbuild@0.23.1)(webpack@5.101.3(esbuild@0.23.1))
+      terser-webpack-plugin: 5.3.14(esbuild@0.25.10)(webpack@5.101.3(esbuild@0.25.10))
       watchpack: 2.4.4
       webpack-sources: 3.3.3
     transitivePeerDependencies:
