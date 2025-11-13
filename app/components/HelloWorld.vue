@@ -45,7 +45,7 @@
         <v-card
           v-for="link in links" :key="link.href"
           :append-icon="mdiArrowTopRight"
-          class="sm:flex-basis-[40%] flex-grow-1 h-[120px] flex items-center [&>.v-card-item]:w-full"
+          class="sm:basis-[40%] flex-grow-1 h-[120px] flex items-center [&>.v-card-item]:w-full"
           color="surface-variant"
           :href="link.href"
           rel="noopener noreferrer"
