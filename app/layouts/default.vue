@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main style="--v-layout-bottom: 40px">
+    <v-main>
       <slot />
     </v-main>
 
