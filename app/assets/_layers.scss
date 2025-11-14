@@ -1,0 +1,13 @@
+@layer vuetify {
+  @layer reset, transitions, base, components, overrides, colors, theme, utilities;
+}
+
+@layer tailwind {
+  @layer theme, utilities;
+}
+
+@layer my-app {
+  @layer base, components, utilities;
+}
+
+@layer vuetify, tailwind, my-app;

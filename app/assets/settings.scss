@@ -1,11 +1,10 @@
 @use 'vuetify/settings' with (
   $layers: true,
-  $kbd-font-family: monospace,
   $code-font-size: .875rem,
   $card-subtitle-header-padding: 0 0 .125rem,
   $card-subtitle-white-space: normal,
   $grid-breakpoints: (
-    // repeated in breakpoints.ts and main.scss
+    // repeated in breakpoints.ts and tailwind.css
     'xs': 0,
     'sm': 400px,
     'md': 840px,
@@ -15,9 +14,9 @@
   ),
   $container-max-widths: (
     // manually calculated (optional after https://github.com/vuetifyjs/vuetify/pull/19759)
-    'md': 700px,
-    'lg': 1000px,
-    'xl': 1400px,
-    'xxl': 2000px,
+    'md': 700px, // round(down, var(--breakpoint-sm) * 0.009375, 100px)
+    'lg': 1000px, // round(down, var(--breakpoint-lg) * 0.009375, 100px)
+    'xl': 1400px, // round(down, var(--breakpoint-xl) * 0.009375, 100px)
+    'xxl': 2000px, // round(down, var(--breakpoint-xxl) * 0.009375, 100px)
   ),
 );

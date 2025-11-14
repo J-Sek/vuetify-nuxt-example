@@ -1,0 +1,15 @@
+/* https://tailwindcss.com/docs/theme#default-theme-variable-reference */
+@theme {
+  --font-heading: "Bricolage Grotesque", sans-serif;
+  --font-sans: Sen, sans-serif;
+  --font-mono: "Sometype Mono", monospace;
+
+  --breakpoint-*: initial;
+  /* repeated breakpoints.ts, main.scss and settings.scss */
+  --breakpoint-xs: 0px;
+  --breakpoint-sm: 400px;
+  --breakpoint-md: 840px;
+  --breakpoint-lg: 1145px;
+  --breakpoint-xl: 1545px;
+  --breakpoint-xxl: 2138px;
+}
