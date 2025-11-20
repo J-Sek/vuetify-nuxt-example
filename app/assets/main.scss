@@ -18,8 +18,9 @@ $body-font: 'Sen';
     'xxl': 2138px,
   ),
   $utilities: (
+    "align-items": (responsive: false, unimportant: (align-items)),
+    "justify-content": (responsive: false, unimportant: (justify-content)),
     "align-content": false,
-    "align-items": false,
     "align-self": false,
     "border-bottom": false,
     "border-current": false,
@@ -48,7 +49,6 @@ $body-font: 'Sen';
     "gap": false,
     "height-screen": false,
     "height": false,
-    "justify-content": false,
     "left": false,
     "margin-bottom": false,
     "margin-end": false,
