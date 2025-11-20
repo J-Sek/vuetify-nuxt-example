@@ -193,10 +193,10 @@ We can finish this part with small adjustment to the example content
 - replace `fill-height` with `h-full`
 - replace `font-weight-light` with `font-light`
 - replace `font-weight-bold` with `font-bold`
-- replace `text-h2` with `text-??`
-- replace `text-h5` with `text-??`
-- replace `text-body-2` with `text-??`
-- replace `text-subtitle-1` with `text-sm`
+- replace `text-h2` with `text-5xl`
+- replace `text-h5` with `text-2xl`
+- replace `text-subtitle-1` with `text-base`
+- replace `text-body-2` with `text-sm`
 
 Turns out there is `v-container` paired with `fill-height` class gets special additional styles when `v-row` is also on the page. (TODO: maybe remove in v4) So we need to add some more utility classes to move the content to the center:
 
@@ -247,9 +247,65 @@ The important thing to note here is that we did not use CSS layers so you might 
 
 In our current configuration order in which the styles are loaded matters - which might make our app behave differently after deployment, as usually Vite "just loads" assets when working on localhost and the order may be quited different for the production bundle.
 
-Usually the easiest fix would be to make UnoCSS generate all the styles with `!important`. This would make them equivalent to original Vuetify utility classes that all had `!important` by default. It is not very elegant, but get's the job done. If you are interested in using CSS layers instead, skip to the [Bonus] (todo) part of this article.
+Usually the easiest fix would be to make UnoCSS generate all the styles with `!important`. This would make them equivalent to original Vuetify utility classes that all had `!important` by default. It is not very elegant, but get's the job done and is easy to reason about. If you are interested in using CSS layers instead, skip to the [Bonus] (todo) part of this article.
 
-TODO: configure important
+```diff
+unocss: {
+  presets: [
+    presetWind4({
++      important: true,
+      preflights: {
+        //...
+      },
+    }),
+  ],
+},
+```
+
+### Font family configuration
+
+To customize fonts we will rely on `@nuxt/fonts` to minimize the amount of configuration required to set up custom font family. Beware it scans the output CSS - doing a magic trick similar to TailwindCSS, but for the fonts. So you might want to inspect the build logs and make sure there is no mention of Roboto after applying the changes described below.
+
+```diff
+unocss: {
+  presets: [
+    presetWind4({
+      //...
+    }),
+  ],
+  theme: {
+    font: {
+      heading: "'Bricolage Grotesque', sans-serif",
+      body: "Sen, sans-serif",
+      mono: "'Sometype Mono', monospace",
+    },
+  },
+},
+
+fonts: {
+  defaults: {
+    weights: [300, 400, 500, 700],
+    styles: ["normal", "italic"],
+    subsets: ["latin"],
+  },
+},
+```
+
+```scss
+@use 'sass:string';
+@use 'vuetify' with (
+  $heading-font-family: string.unquote('"Bricolage Grotesque", sans-serif'),
+  $body-font-family: string.unquote('Sen, sans-serif'),
+  // ...
+)
+
+code,
+pre,
+.v-code {
+  @apply font-mono;
+}
+```
+
 
 Next: ensure `dark:*` works with dark theme
 Next: setup custom typography

@@ -78,9 +78,9 @@ export default defineNuxtConfig({
     ],
     theme: {
       font: {
-        sans: "Sen",
-        serif: "sans-serif",
-        mono: "Sometype Mono",
+        heading: "'Bricolage Grotesque', sans-serif",
+        body: "Sen, sans-serif",
+        mono: "'Sometype Mono', monospace",
       },
       colors: {
         primary: {

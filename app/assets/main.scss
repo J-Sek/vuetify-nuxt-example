@@ -1,11 +1,7 @@
 @use 'sass:string';
-
-$heading-font: 'Bricolage Grotesque';
-$body-font: 'Sen';
-
 @use 'vuetify' with (
-  $heading-font-family: $heading-font,
-  $body-font-family: $body-font,
+  $heading-font-family: string.unquote('"Bricolage Grotesque", sans-serif'),
+  $body-font-family: string.unquote('Sen, sans-serif'),
   $layers: true,
   $color-pack: false,
   $grid-breakpoints: (
@@ -106,3 +102,9 @@ $body-font: 'Sen';
     "width": false,
   ),
 );
+
+code,
+pre,
+.v-code {
+  @apply font-mono;
+}
