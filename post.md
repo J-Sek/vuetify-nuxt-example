@@ -46,6 +46,8 @@ pnpm build
 
 We can see that CSS + Icons weight nearly 1MB (uncompressed) which feels like it is just too much. Beware that some real-life projects target office-based users and it simply does not matter in comparison to database storage optimization, data caching or good decisions around auto-scaling in the cloud. With that disclaimer out of the way, let's see how we can optimize this.
 
+Anytime you build the project, bundle files are right there in the `.output/public/_nuxt` directory. The CSS bundle file named `entry{hash}.css` is one that might be particularly interesting. Keep in mind VSCode might refuse to format it, choke or even freeze – I recommend Zed editor for the optimal experience.
+
 ## Optimizing icons
 
 Full MDI iconset provides 7000+ different icons (including variants). How much does a typical project actually use? It tends to land in the 50-150 range. So we get a lot of overhead. This only makes sense if you don't control the content - giving user freedom to choose any icon. A typical solution is to use SVG iconset instead. This will require importing SVG paths in many places, but you can utilize aliasing to standardize and avoid loading the same thing more than once. I usually use both - creating aliases for icons that will be reused across the project.
