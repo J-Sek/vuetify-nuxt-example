@@ -373,7 +373,83 @@ unocss: {
 +      },
 ```
 
-Next: setup custom typography
+### Custom typography (text variants)
+
+> If you intend to fully rely on TailwindCSS classes or have some specific typography requirements, you can skip no the next part.
+
+Let's add a quick preview page for all the typography options that used to be provided by Vuetify.
+
+```vue
+<template>
+  <v-container class="page" max-width="800">
+    <div class="flex flex-wrap sm:justify-center gap-6 mt-12">
+      <div class="flex-grow-1">
+        <div v-for="[name, cls] in headings" :key="name" class="my-1 pa-2 hover:bg-gray-500/20">
+          <div :class="[cls, 'py-2']">{{ name }}</div>
+          <div class="pb-2">
+            <v-code class="font-medium px-2 bg-gray-500/20">{{ cls }}</v-code>
+          </div>
+        </div>
+      </div>
+      <div class="flex-grow-1">
+        <div v-for="[name, cls] in bodyText" :key="name" class="my-1 pa-2 hover:bg-gray-500/20">
+          <div :class="[cls, 'py-2']">{{ name }}</div>
+          <div class="pb-2">
+            <v-code class="font-medium px-2 bg-gray-500/20">{{ cls }}</v-code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </v-container>
+</template>
+
+<script setup lang="ts">
+const headings = [
+  ['Heading 1', 'text-h1'],
+  ['Heading 2', 'text-h2'],
+  ['Heading 3', 'text-h3'],
+  ['Heading 4', 'text-h4'],
+  ['Heading 5', 'text-h5'],
+  ['Heading 6', 'text-h6'],
+]
+const bodyText = [
+  ['Subtitle 1', 'text-subtitle-1'],
+  ['Subtitle 2', 'text-subtitle-2'],
+  ['Body 1', 'text-body-1'],
+  ['Body 2', 'text-body-2'],
+  ['Button', 'text-button'],
+  ['Caption', 'text-caption'],
+  ['Overline', 'text-overline'],
+]
+</script>
+```
+
+We can see none of the usual helper classes work because we disabled `$utilities`. Theoretically we could opt out more granularly, but those classes won't work with responsive prefixes (`sm:*`, `md:*`, etc) - by default they are generated with responsive variants stuffed in the middle (e.g. `*-sm-*`, `*-md-*`, etc.). Having both conventions may be considered an unnecessary mental overhead, so the recommended approach would is to recreate the helpers in UnoCSS configuration `shortcuts`.
+
+Following configuration is aligned with defaults from Vuetify v3.11.x
+
+```ts
+unocss: {
+  presets: [ ... ],
+  theme: { ... },
+  shortcuts: {
+    'text-h1': 'font-heading normal-case text-[6rem]     font-[300] leading-[1]     tracking-[-.015625em]',
+    'text-h2': 'font-heading normal-case text-[3.75rem]  font-[300] leading-[1]     tracking-[-.0083333333em]',
+    'text-h3': 'font-heading normal-case text-[3rem]     font-[400] leading-[1.05]  tracking-[normal]',
+    'text-h4': 'font-heading normal-case text-[2.125rem] font-[400] leading-[1.175] tracking-[.0073529412em]',
+    'text-h5': 'font-heading normal-case text-[1.5rem]   font-[400] leading-[1.333] tracking-[normal]',
+    'text-h6': 'font-heading normal-case text-[1.25rem]  font-[500] leading-[1.6]   tracking-[.0125em]',
+    'text-subtitle-1': 'font-body normal-case text-[1rem]    font-[400] leading-[1.75]  tracking-[.009375em]',
+    'text-subtitle-2': 'font-body normal-case text-[.875rem] font-[500] leading-[1.6]   tracking-[.0071428571em]',
+    'text-body-1':     'font-body normal-case text-[1rem]    font-[400] leading-[1.5]   tracking-[.03125em]',
+    'text-body-2':     'font-body normal-case text-[.875rem] font-[400] leading-[1.425] tracking-[.0178571429em]',
+    'text-button':     'font-body uppercase   text-[.875rem] font-[500] leading-[2.6]   tracking-[.0892857143em]',
+    'text-caption':    'font-body normal-case text-[.75rem]  font-[400] leading-[1.667] tracking-[.0333333333em]',
+    'text-overline':   'font-body uppercase   text-[.75rem]  font-[500] leading-[2.667] tracking-[.1666666667em]',
+  },
+},
+```
+
 Next: customize breakpoints
 Next: discuss switching to pure TailwindCSS
   - nuxt module - not supporting TailwindCSS v4
