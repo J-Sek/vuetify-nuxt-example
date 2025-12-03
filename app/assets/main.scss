@@ -6,6 +6,7 @@
   $color-pack: false,
   $grid-breakpoints: (
     // repeated in breakpoints.ts and settings.scss
+    // not required, unless you re-enable some of the responsive utilities below
     'xs': 0,
     'sm': 400px,
     'md': 840px,

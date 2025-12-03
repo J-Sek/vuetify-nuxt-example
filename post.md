@@ -450,9 +450,157 @@ unocss: {
 },
 ```
 
-Next: customize breakpoints
+### Customize breakpoints
+
+Default breakpoints provided by TailwindCSS preset are not compatible with Vuetify. Leaving this issue unattended might lead to unnecessary headaches down the road, so let's tackle the issue and make sure we keep it under control.
+
+However, unlike other aspects it is more challenging to have a squicky cleanup with a single definition. It is true with Vuetify even without integrating it with Uno or Tailwind. When I customize vanilla Vuetify project I end up having duplication and some comments that remind me of it.
+
+- `main.scss` - breakpoints within `@use 'vuetify' with (...)` for CSS utilities
+- `settings.scss` - breakpoints within `@use 'vuetify/settings' with (...)` for VContainer and VCol
+- general Vuetify configuration `display` » `thresholds` for responsive logic in some components, `useDisplay` and `$vuetify.display.*`
+
+Since we fully replaced CSS utilities, we won't need breakpoints in `main.scss`. It will also be cleaner if define it in a separate TS file and to be imported for both main Vuetify configuration and UnoCSS, so we will end up with 2 places to maintain. As a side-note, integration with TailwindCSS v4 (without UnoCSS) would mean we are back with 3 definitions, because latest TailwindCSS expects pure CSS variables. Anyway, enought talking - let's jump right into the code.
+
+Create `breakpoints.ts` under `./app/theme` (create new `theme` folder) with the following content:
+
+```ts
+import type { DisplayThresholds } from "vuetify"
+
+// repeated in settings.scss
+const breakpoints: DisplayThresholds = {
+  xs: 0,
+  sm: 400,
+  md: 840,
+  lg: 1145,
+  xl: 1545,
+  xxl: 2138,
+}
+
+export const forVuetify = breakpoints
+
+export const forTailwind = Object.entries(breakpoints)
+  .reduce(
+    (o, [key, value]) => ({ ...o, [key]: `${value}px` }),
+    {} as Record<keyof DisplayThresholds, string>,
+  )
+```
+
+Import and apply it to both Vuetify in UnoCSS in `nuxt.config.ts`
+
+```ts
+import * as breakpoints from './app/theme/breakpoints'
+
+// ...
+
+unocss: {
+  presets: [ ... ],
+  theme: {
+    font: { ... },
+    colors: { ... },
++    breakpoint: breakpoints.forTailwind,
+  },
+  shortcuts: { ... },
+},
+vuetify: {
+  moduleOptions: { ... },
++  vuetifyOptions: {
++    display: {
++      mobileBreakpoint: "md",
++      thresholds: breakpoints.forVuetify,
++    },
++  }
+},
+```
+
+Now adjust the SCSS variables for Vuetify. Note that as of `v3.11.2 ` the `$container-max-widths` would be calculated without rounding the values. I prefer those values to be stable
+
+```scss
+@use 'vuetify/settings' with (
+  $grid-breakpoints: (
+    // repeated in breakpoints.ts
+    'xs': 0,
+    'sm': 400px,
+    'md': 840px,
+    'lg': 1145px,
+    'xl': 1545px,
+    'xxl': 2138px,
+  ),
+  $container-max-widths: (
+    // manually calculated (optional after https://github.com/vuetifyjs/vuetify/pull/19759)
+    'md': 700px,
+    'lg': 1000px,
+    'xl': 1400px,
+    'xxl': 2000px,
+  ),
+);
+```
+
+The important next step is to verify the changes. I recommend creating and keeping a hidden technical page that will help verify changes or quickly troubleshoot the regression. Here is what you can paste into `app/pages/breakpoints.ts`:
+
+```vue
+<template>
+  <v-container ref="container" class="mt-12 outline-dashed">
+    <v-sheet class="mx-auto pa-6" max-width="400">
+      <v-table>
+        <tbody>
+          <tr>
+            <td>Viewport width</td>
+            <td class="text-right">
+              <v-code>{{ $vuetify.display.width }}px</v-code>
+            </td>
+          </tr>
+          <tr>
+            <td>Breakpoint</td>
+            <td class="text-right">
+              <v-code>{{ $vuetify.display.name }}</v-code>
+            </td>
+          </tr>
+          <tr>
+            <td>VContainer width</td>
+            <td class="text-right">
+              <v-code v-if="container">{{ container.$el.clientWidth }}px</v-code>
+            </td>
+          </tr>
+        </tbody>
+      </v-table>
+      <br>
+      <v-row wrap dense>
+        <v-col
+          v-for="i in 12" :key="i"
+          cols="12" sm="6" md="4" lg="3" xl="2" xxl="1"
+        >
+          <div
+            class="
+              bg-red-500/50
+              sm:bg-lime-500/50
+              md:bg-sky-500/50
+              lg:bg-amber-500/50
+              xl:bg-teal-500/50
+              xxl:bg-pink-500/50
+              text-white/80
+              xxl:text-transparent
+              text-center
+            "
+          >VCol</div>
+        </v-col>
+      </v-row>
+    </v-sheet>
+  </v-container>
+</template>
+
+<script setup lang="ts">
+const container = useTemplateRef('container')
+</script>
+```
+
+Restart the Dev server and open `localhost:3000/breakpoints`.
+
+---
+
 Next: discuss switching to pure TailwindCSS
   - nuxt module - not supporting TailwindCSS v4
   - vite pluing - ..problems?
   - via PostCSS - recommended
+
 Bonus: using CSS layers
