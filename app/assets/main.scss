@@ -105,8 +105,12 @@
   ),
 );
 
-code,
-pre,
-.v-code {
-  @apply font-mono;
+@layer vuetify.base {
+  code, pre, .v-code {
+    @apply font-mono;
+  }
+}
+
+@layer app {
+  @layer base, components, utilities;
 }

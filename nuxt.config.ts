@@ -76,6 +76,15 @@ export default defineNuxtConfig({
         },
       }),
     ],
+    layers: {
+      'uno.properties': -1,
+      'uno.shortcuts': 0,
+      'uno.theme': 1,
+      'uno.utilities': 2,
+    },
+    outputToCssLayers: {
+      cssLayerName: (layer) => `uno.${layer}`
+    },
     theme: {
       font: {
         heading: "'Bricolage Grotesque', sans-serif",

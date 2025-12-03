@@ -596,11 +596,121 @@ const container = useTemplateRef('container')
 
 Restart the Dev server and open `localhost:3000/breakpoints`.
 
+### Using CSS layers (bonus)
+
+> TODO: link external learning resources
+> TODO: examples to explain the impact
+
+You have to include `$layers: true` in both `main.scss` and `settings.scss`
+
+```diff
+@use 'vuetify' with (
++  $layers: true,
+```
+
+```diff
+@use 'vuetify/settings' with (
++  $layers: true,
+```
+
+The first one covers CSS reset, base styles, transitions and utilities. The second one ensures `@layer vuetify.components { ... }` wraps styles for regular components.
+
+Update Vuetify configuration to enable `@layers` for themes - CSS that is generated at runtime and injected into document `<head>`.
+
+```diff
+  theme: {
++    layers: true,
+    defaultTheme: "dark",
+    themes: {
+      dark: { ... },
+      light: { ... },
+```
+
+Finally we update UnoCSS configuration
+
+```diff
+unocss: {
+  presets: [ ... ],
++  layers: {
++    'uno.properties': -1,
++    'uno.shortcuts': 0,
++    'uno.theme': 1,
++    'uno.utilities': 2,
++  },
++  outputToCssLayers: {
++    cssLayerName: (layer) => `uno.${layer}`
++  },
+  theme: { ... },
+  shortcuts: { ... },
+},
+```
+
+You can now utilize them to manage overrides without fighting specificity.
+For example:
+
+```css
+@layer vuetify.base {
+  code, pre, .v-code {
+    @apply font-mono;
+  }
+}
+```
+
+When it comes to regular development, you should define layers you intend make sense for your app size. For medium projects I tend to start with no-brainer split into `base`, `components`, and custom `utilities`.
+
+```css
+@layer app {
+  @layer base, components, utilities;
+}
+```
+
+Here are some examples that help visualize the purpose of each group.
+
+```css
+@layer app.base {
+  .page {
+    padding: 0 2rem 4rem;
+
+    &__header {
+      padding: 2rem 0 1rem;
+    }
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #888a #8882;
+  }
+}
+
+
+@layer app.utilities {
+  .force-center {
+    display: grid;
+    place-items: center;
+  }
+
+  .flex-expand-even {
+    @apply flex [&>*]:flex-1
+  }
+}
+```
+
+`@layer app.components { ... }` is meant to go into `<style>` of reusable components. Remember to drop the `scoped` and ensure components have unique classes to wrap the styles.
+
+```css
+<style>
+@layer app.components {
+  .my-sortable-list { ... }
+}
+</style>
+```
+
+> TODO: summary
+
 ---
 
-Next: discuss switching to pure TailwindCSS
+(split to next follow-up post)
+Discuss switching to pure TailwindCSS
   - nuxt module - not supporting TailwindCSS v4
-  - vite pluing - ..problems?
+  - vite plugin - ..problems?
   - via PostCSS - recommended
-
-Bonus: using CSS layers
