@@ -3,6 +3,7 @@ import { defineVuetifyConfiguration } from "vuetify-nuxt-module/custom-configura
 export default defineVuetifyConfiguration({
   // your Vuetify options here
   theme: {
+    layers: true,
     defaultTheme: "dark",
     themes: {
       dark: {
