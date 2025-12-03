@@ -9,6 +9,7 @@ I decided to break the guide into 2 pieces. Firstly, we will sprint from the sta
 Second part will focus on replacing UnoCSS with actuall TailwindCSS. You might be surprise to learn all 3 ways to integrate this piece that might make it very frustrating to setup. We will discuss pros and cons of each method.
 
 Along the way we will keep in mind that successful integration has to correctly match following aspects:
+
 - themes (light / dark mode)
 - custom typography
 - responsive breakpoints
@@ -57,59 +58,59 @@ pnpm add @mdi/js
 Then configure default set in `vuetify.config.ts`:
 
 ```diff
-+  icons: {
-+    defaultSet: "mdi-svg",
-+  },
++ icons: {
++   defaultSet: "mdi-svg",
++ },
 ```
 
 Now we need to find and replace every `mdi-*` icon declaration.
 
 ```diff
-- prepend-icon="mdi-rocket-launch-outline"
-+ :prepend-icon="`svg:${mdiRocketLaunchOutline}`"
+-prepend-icon="mdi-rocket-launch-outline"
++:prepend-icon="`svg:${mdiRocketLaunchOutline}`"
 ```
 
 ```diff
-- append-icon="mdi-open-in-new"
-+ :append-icon="`svg:${mdiOpenInNew}`"
+-append-icon="mdi-open-in-new"
++:append-icon="`svg:${mdiOpenInNew}`"
 ```
 
 ```diff
 <script setup lang="ts">
-+  import {
-+    mdiAccountGroupOutline,
-+    mdiRocketLaunchOutline,
-+    mdiOpenInNew,
-+    mdiText,
-+    mdiWidgetsOutline,
-+  } from '@mdi/js'
++ import {
++   mdiAccountGroupOutline,
++   mdiRocketLaunchOutline,
++   mdiOpenInNew,
++   mdiText,
++   mdiWidgetsOutline,
++ } from '@mdi/js'
 
   const links = [
     {
       href: 'https://vuetifyjs.com/',
--      icon: 'mdi-text-box-outline',
-+      icon: `svg:${mdiText}`,
+-     icon: 'mdi-text-box-outline',
++     icon: `svg:${mdiText}`,
       subtitle: 'Learn about all things Vuetify in our documentation.',
       title: 'Documentation',
     },
     {
       href: 'https://vuetifyjs.com/introduction/why-vuetify/#feature-guides',
--      icon: 'mdi-star-circle-outline',
-+      icon: '$ratingFull',
+-     icon: 'mdi-star-circle-outline',
++     icon: '$ratingFull',
       subtitle: 'Explore available framework Features.',
       title: 'Features',
     },
     {
       href: 'https://vuetifyjs.com/components/all',
--      icon: 'mdi-widgets-outline',
-+      icon: `svg:${mdiWidgetsOutline}`,
+-     icon: 'mdi-widgets-outline',
++     icon: `svg:${mdiWidgetsOutline}`,
       subtitle: 'Discover components in the API Explorer.',
       title: 'Components',
     },
     {
       href: 'https://discord.vuetifyjs.com',
--      icon: 'mdi-account-group-outline',
-+      icon: `svg:${mdiAccountGroupOutline}`,
+-     icon: 'mdi-account-group-outline',
++     icon: `svg:${mdiAccountGroupOutline}`,
       subtitle: 'Connect with Vuetify developers.',
       title: 'Community',
     },
@@ -143,12 +144,12 @@ css: [
 ...and add/uncomment `vuetify-nuxt-module` configuration flag:
 
 ```ts
-  vuetify: {
-    moduleOptions: {
-      // ...other stuff...
-      disableVuetifyStyles: true,
-    },
+vuetify: {
+  moduleOptions: {
+    // ...other stuff...
+    disableVuetifyStyles: true,
   },
+},
 ```
 
 If you run `pnpm build` again, you may observe that `entry.*.css` bundle is nearly 10 times smaller.
@@ -166,24 +167,24 @@ pnpm add unocss @unocss/preset-wind4 @unocss/nuxt
 Register the module in `nuxt.config.ts`
 
 ```diff
-  modules: [
-+   '@unocss/nuxt',
-    // ...other stuff...
-  ]
+modules: [
++ '@unocss/nuxt',
+  // ...other stuff...
+]
 ```
 
 ...and add the configuration right next to it:
 
 ```ts
-  unocss: {
-    presets: [
-      presetWind4({
-        preflights: {
-          reset: false,
-        },
-      }),
-    ],
-  },
+unocss: {
+  presets: [
+    presetWind4({
+      preflights: {
+        reset: false,
+      },
+    }),
+  ],
+},
 ```
 
 The code above ensures we use only CSS reset from Vuetify and won't experience conflicts.
@@ -234,6 +235,7 @@ $utilities: (
   "align-items": (responsive: false, unimportant: (align-items)),
   "justify-content": (responsive: false, unimportant: (justify-content)),
   // followed by 80+ lines with all other utilities set to `false`
+  // full list: https://vuetifyjs.com/en/features/sass-variables/#disabling-utility-classes
 )
 ```
 
@@ -253,10 +255,8 @@ Usually the easiest fix would be to make UnoCSS generate all the styles with `!i
 unocss: {
   presets: [
     presetWind4({
-+      important: true,
-      preflights: {
-        //...
-      },
++     important: true,
+      preflights: { ... },
     }),
   ],
 },
@@ -267,28 +267,23 @@ unocss: {
 To customize fonts we will rely on `@nuxt/fonts` to minimize the amount of configuration required to set up custom font family. Beware it scans the output CSS - doing a magic trick similar to TailwindCSS, but for the fonts. So you might want to inspect the build logs and make sure there is no mention of Roboto after applying the changes described below.
 
 ```diff
-unocss: {
-  presets: [
-    presetWind4({
-      //...
-    }),
-  ],
-  theme: {
-    font: {
-      heading: "'Bricolage Grotesque', sans-serif",
-      body: "Sen, sans-serif",
-      mono: "'Sometype Mono', monospace",
-    },
+  unocss: {
+    presets: [ ... ],
++   theme: {
++     font: {
++       heading: "'Bricolage Grotesque', sans-serif",
++       body: "Sen, sans-serif",
++       mono: "'Sometype Mono', monospace",
++     },
++   },
   },
-},
-
-fonts: {
-  defaults: {
-    weights: [300, 400, 500, 700],
-    styles: ["normal", "italic"],
-    subsets: ["latin"],
-  },
-},
++ fonts: {
++   defaults: {
++     weights: [300, 400, 500, 700],
++     styles: ["normal", "italic"],
++     subsets: ["latin"],
++   },
++ },
 ```
 
 ```scss
@@ -316,13 +311,13 @@ unocss: {
   theme: {
     font: { ... },
     colors: {
-+      primary: {
-+        800: '#003256',
-+      },
-+      secondary: {
-+        600: '#00677e',
-+        800: '#003543',
-+      }
++     primary: {
++       800: '#003256',
++     },
++     secondary: {
++       600: '#00677e',
++       800: '#003543',
++     }
     },
   },
 },
@@ -367,10 +362,10 @@ unocss: {
   presets: [
     presetWind4({
       preflights: { ... },
-+      dark: {
-+        dark: '.v-theme--dark',
-+        light: '.v-theme--light',
-+      },
++     dark: {
++       dark: '.v-theme--dark',
++       light: '.v-theme--light',
++     },
 ```
 
 ### Custom typography (text variants)
@@ -488,29 +483,31 @@ export const forTailwind = Object.entries(breakpoints)
 
 Import and apply it to both Vuetify in UnoCSS in `nuxt.config.ts`
 
-```ts
-import * as breakpoints from './app/theme/breakpoints'
+```diff
++import * as breakpoints from './app/theme/breakpoints'
 
-// ...
+export default defineNuxtConfig({
+  // ...
 
-unocss: {
-  presets: [ ... ],
-  theme: {
-    font: { ... },
-    colors: { ... },
-+    breakpoint: breakpoints.forTailwind,
+  unocss: {
+    presets: [ ... ],
+    theme: {
+      font: { ... },
+      colors: { ... },
++     breakpoint: breakpoints.forTailwind,
+    },
+    shortcuts: { ... },
   },
-  shortcuts: { ... },
-},
-vuetify: {
-  moduleOptions: { ... },
-+  vuetifyOptions: {
-+    display: {
-+      mobileBreakpoint: "md",
-+      thresholds: breakpoints.forVuetify,
-+    },
-+  }
-},
+
+  vuetify: {
+    moduleOptions: { ... },
++   vuetifyOptions: {
++     display: {
++       mobileBreakpoint: "md",
++       thresholds: breakpoints.forVuetify,
++     },
++   }
+  },
 ```
 
 Now adjust the SCSS variables for Vuetify. Note that as of `v3.11.2 ` the `$container-max-widths` would be calculated without rounding the values. I prefer those values to be stable
@@ -598,19 +595,18 @@ Restart the Dev server and open `localhost:3000/breakpoints`.
 
 ### Using CSS layers (bonus)
 
-> TODO: link external learning resources
-> TODO: examples to explain the impact
+> TODO: link external learning resources + examples to explain the impact
 
 You have to include `$layers: true` in both `main.scss` and `settings.scss`
 
 ```diff
 @use 'vuetify' with (
-+  $layers: true,
++ $layers: true,
 ```
 
 ```diff
 @use 'vuetify/settings' with (
-+  $layers: true,
++ $layers: true,
 ```
 
 The first one covers CSS reset, base styles, transitions and utilities. The second one ensures `@layer vuetify.components { ... }` wraps styles for regular components.
@@ -619,7 +615,7 @@ Update Vuetify configuration to enable `@layers` for themes - CSS that is genera
 
 ```diff
   theme: {
-+    layers: true,
++   layers: true,
     defaultTheme: "dark",
     themes: {
       dark: { ... },
@@ -631,15 +627,15 @@ Finally we update UnoCSS configuration
 ```diff
 unocss: {
   presets: [ ... ],
-+  layers: {
-+    'uno.properties': -1,
-+    'uno.shortcuts': 0,
-+    'uno.theme': 1,
-+    'uno.utilities': 2,
-+  },
-+  outputToCssLayers: {
-+    cssLayerName: (layer) => `uno.${layer}`
-+  },
++ layers: {
++   'uno.properties': -1,
++   'uno.shortcuts': 0,
++   'uno.theme': 1,
++   'uno.utilities': 2,
++ },
++ outputToCssLayers: {
++   cssLayerName: (layer) => `uno.${layer}`
++ },
   theme: { ... },
   shortcuts: { ... },
 },
@@ -711,6 +707,7 @@ Here are some examples that help visualize the purpose of each group.
 
 (split to next follow-up post)
 Discuss switching to pure TailwindCSS
-  - nuxt module - not supporting TailwindCSS v4
-  - vite plugin - ..problems?
-  - via PostCSS - recommended
+
+- nuxt module - not supporting TailwindCSS v4
+- vite plugin - ..problems?
+- via PostCSS - recommended
