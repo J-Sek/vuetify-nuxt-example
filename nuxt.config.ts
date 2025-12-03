@@ -70,6 +70,10 @@ export default defineNuxtConfig({
         preflights: {
           reset: false,
         },
+        dark: {
+          dark: '.v-theme--dark',
+          light: '.v-theme--light',
+        },
       }),
     ],
     theme: {
@@ -77,6 +81,18 @@ export default defineNuxtConfig({
         sans: "Sen",
         serif: "sans-serif",
         mono: "Sometype Mono",
+      },
+      colors: {
+        primary: {
+          500: '#007bcc',
+          800: '#003256',
+        },
+        secondary: {
+          500: '#00829E',
+          600: '#00677e',
+          700: '#004e5f',
+          800: '#003543',
+        },
       },
       breakpoint: breakpoints.forTailwind,
     },
