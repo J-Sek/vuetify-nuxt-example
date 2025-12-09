@@ -1,4 +1,5 @@
-import presetWind4 from "@unocss/preset-wind4";
+import presetWind4 from '@unocss/preset-wind4'
+import transformerDirectives from '@unocss/transformer-directives'
 import * as breakpoints from './app/theme/breakpoints'
 
 const targetDomain = import.meta.env.TARGET_DOMAIN
@@ -75,6 +76,9 @@ export default defineNuxtConfig({
           light: '.v-theme--light',
         },
       }),
+    ],
+    transformers: [
+      transformerDirectives(),
     ],
     layers: {
       'uno.properties': -1,
