@@ -50,10 +50,12 @@ export default defineNuxtConfig({
     },
   },
 
-
   vite: {
     ssr: {
       noExternal: ["vuetify"],
+    },
+    build: {
+      cssMinify: 'lightningcss',
     },
   },
 
@@ -81,13 +83,12 @@ export default defineNuxtConfig({
       transformerDirectives(),
     ],
     layers: {
-      'uno.properties': -1,
       'uno.shortcuts': 0,
       'uno.theme': 1,
       'uno.utilities': 2,
     },
     outputToCssLayers: {
-      cssLayerName: (layer) => `uno.${layer}`
+      cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`
     },
     theme: {
       font: {
