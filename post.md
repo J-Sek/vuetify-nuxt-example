@@ -163,7 +163,7 @@ The good thing to ask would be - do we have to drop it all. Not necessarily. One
 ### Shortest way to setup UnoCSS
 
 ```sh
-pnpm add unocss @unocss/preset-wind4 @unocss/nuxt @unocss/transformer-directives
+pnpm add unocss @unocss/preset-wind4 @unocss/nuxt
 ```
 
 Register the module in `nuxt.config.ts`
@@ -179,7 +179,6 @@ modules: [
 
 ```ts
 import presetWind4 from '@unocss/preset-wind4'
-import transformerDirectives from '@unocss/transformer-directives'
 
 export default defineNuxtConfig({
   // ...other stuff...
@@ -191,9 +190,6 @@ export default defineNuxtConfig({
           reset: false,
         },
       }),
-    ],
-    transformers: [
-      transformerDirectives(),
     ],
   },
 })
@@ -281,7 +277,6 @@ To customize fonts we will rely on `@nuxt/fonts` to minimize the amount of confi
 ```diff
   unocss: {
     presets: [ ... ],
-    transformers: [ ... ],
 +   theme: {
 +     font: {
 +       heading: "'Bricolage Grotesque', sans-serif",
@@ -310,7 +305,7 @@ To customize fonts we will rely on `@nuxt/fonts` to minimize the amount of confi
 code,
 pre,
 .v-code {
-  @apply font-mono;
+  font-family: var(--font-mono);
 }
 ```
 
@@ -439,7 +434,6 @@ Following configuration is aligned with defaults from Vuetify v3.11.x
 ```ts
 unocss: {
   presets: [ ... ],
-  transformers: [ ... ],
   theme: { ... },
   shortcuts: {
     'text-h1': 'font-heading normal-case text-[6rem]     font-[300] leading-[1]     tracking-[-.015625em]',
@@ -505,7 +499,6 @@ export default defineNuxtConfig({
 
   unocss: {
     presets: [ ... ],
-    transformers: [ ... ],
     theme: {
       font: { ... },
       colors: { ... },
@@ -642,7 +635,6 @@ Finally we update UnoCSS configuration
 ```diff
 unocss: {
   presets: [ ... ],
-  transformers: [ ... ],
 + layers: {
 +   'uno.properties': -1,
 +   'uno.shortcuts': 0,
@@ -663,7 +655,7 @@ For example:
 ```css
 @layer vuetify.base {
   code, pre, .v-code {
-    @apply font-mono;
+    font-family: var(--font-mono);
   }
 }
 ```
@@ -702,7 +694,10 @@ Here are some examples that help visualize the purpose of each group.
   }
 
   .flex-expand-even {
-    @apply flex [&>*]:flex-1
+    display: flex;
+    > * {
+      flex: 1;
+    }
   }
 }
 ```

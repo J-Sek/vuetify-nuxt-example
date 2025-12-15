@@ -107,10 +107,24 @@
 
 @layer vuetify.base {
   code, pre, .v-code {
-    @apply font-mono;
+    font-family: var(--font-mono);
   }
 }
 
 @layer app {
   @layer base, components, utilities;
+}
+
+@layer app.utilities {
+  .force-center {
+    display: grid;
+    place-items: center;
+  }
+
+  .flex-expand-even {
+    display: flex;
+    > * {
+      flex: 1;
+    }
+  }
 }
