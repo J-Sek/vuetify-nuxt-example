@@ -32,8 +32,6 @@ Start the project on localhost
 pnpm dev
 ```
 
-**Note**: If you selected "no" for `vuetify-nuxt-module`, you might see the page did not load any CSS (except theme). You can quickly fix it by going into adding a new file `main.scss` with `@use 'vuetify';` inside and referencing it from nuxt or with `import '../assets/main.scss'` from `plugins/vuetify.ts`.
-
 ## You cannot improve what you don't measure
 
 Nuxt uses Vite under the hood to build assets for production. Sizes are all layed out in the logs.
@@ -126,32 +124,13 @@ It is possible to configure custom Vuetify iconset with UnoCSS to get access to 
 
 ## Using TailwindCSS (via UnoCSS preset)
 
-Create the `app/assets/main.scss` and paste:
+Edit the `app/assets/settings.scss` and paste:
 
 ```scss
-@use 'vuetify' with (
+@use 'vuetify/settings' with (
   $color-pack: false,
   $utilities: false,
 )
-```
-
-New file has to be referenced or imported. Go ahead and include it in `nuxt.config.ts`
-
-```ts
-css: [
-  "assets/main.scss",
-],
-```
-
-...and add/uncomment `vuetify-nuxt-module` configuration flag:
-
-```ts
-vuetify: {
-  moduleOptions: {
-    // ...other stuff...
-    disableVuetifyStyles: true,
-  },
-},
 ```
 
 If you run `pnpm build` again, you may observe that `entry.*.css` bundle is nearly 10 times smaller.
@@ -277,31 +256,33 @@ To customize fonts we will rely on `@nuxt/fonts` to minimize the amount of confi
 ```diff
   unocss: {
     presets: [ ... ],
-+   theme: {
-+     font: {
-+       heading: "'Bricolage Grotesque', sans-serif",
-+       body: "Sen, sans-serif",
-+       mono: "'Sometype Mono', monospace",
-+     },
-+   },
++    theme: {
++      font: {
++        heading: "'Bricolage Grotesque', sans-serif",
++        body: "Sen, sans-serif",
++        mono: "'Sometype Mono', monospace",
++      },
++    },
++    safelist: ['font-heading', 'font-body', 'font-mono'],
   },
-+ fonts: {
-+   defaults: {
-+     weights: [300, 400, 500, 700],
-+     styles: ["normal", "italic"],
-+     subsets: ["latin"],
-+   },
-+ },
++  fonts: {
++    defaults: {
++      weights: [300, 400, 500, 700],
++      styles: ["normal", "italic"],
++      subsets: ["latin"],
++    },
++  },
 ```
 
 ```scss
-@use 'sass:string';
-@use 'vuetify' with (
-  $heading-font-family: string.unquote('"Bricolage Grotesque", sans-serif'),
-  $body-font-family: string.unquote('Sen, sans-serif'),
+@use 'vuetify/settings' with (
+  $heading-font-family: var(--font-heading),
+  $body-font-family: var(--font-body),
   // ...
 )
 
+```scss
+// main.scss
 code,
 pre,
 .v-code {
@@ -457,13 +438,12 @@ unocss: {
 
 Default breakpoints provided by TailwindCSS preset are not compatible with Vuetify. Leaving this issue unattended might lead to unnecessary headaches down the road, so let's tackle the issue and make sure we keep it under control.
 
-However, unlike other aspects it is more challenging to have a squicky cleanup with a single definition. It is true with Vuetify even without integrating it with Uno or Tailwind. When I customize vanilla Vuetify project I end up having duplication and some comments that remind me of it.
+When I customize vanilla Vuetify project I end up having duplication and some comments that remind me of it.
 
-- `main.scss` - breakpoints within `@use 'vuetify' with (...)` for CSS utilities
-- `settings.scss` - breakpoints within `@use 'vuetify/settings' with (...)` for VContainer and VCol
+- `settings.scss` - breakpoints for VContainer, VCol and responsive utilities (if we would keep any)
 - general Vuetify configuration `display` » `thresholds` for responsive logic in some components, `useDisplay` and `$vuetify.display.*`
 
-Since we fully replaced CSS utilities, we won't need breakpoints in `main.scss`. It will also be cleaner if define it in a separate TS file and to be imported for both main Vuetify configuration and UnoCSS, so we will end up with 2 places to maintain. As a side-note, integration with TailwindCSS v4 (without UnoCSS) would mean we are back with 3 definitions, because latest TailwindCSS expects pure CSS variables. Anyway, enought talking - let's jump right into the code.
+It will be cleaner if we define it in a separate TS file and to be imported for both main Vuetify configuration and UnoCSS, so we will end up with 2 places to maintain. As a side-note, integration with TailwindCSS v4 (without UnoCSS) would mean we are back with 3 definitions, because latest TailwindCSS expects pure CSS variables. Anyway, enought talking - let's jump right into the code.
 
 Create `breakpoints.ts` under `./app/theme` (create new `theme` folder) with the following content:
 
@@ -605,13 +585,6 @@ Restart the Dev server and open `localhost:3000/breakpoints`.
 
 > TODO: link external learning resources + examples to explain the impact
 
-You have to include `$layers: true` in both `main.scss` and `settings.scss`
-
-```diff
-@use 'vuetify' with (
-+ $layers: true,
-```
-
 ```diff
 @use 'vuetify/settings' with (
 + $layers: true,
@@ -652,7 +625,8 @@ unocss: {
 You can now utilize them to manage overrides without fighting specificity.
 For example:
 
-```css
+```scss
+// main.scss
 @layer vuetify.base {
   code, pre, .v-code {
     font-family: var(--font-mono);
@@ -662,7 +636,7 @@ For example:
 
 When it comes to regular development, you should define layers you intend make sense for your app size. For medium projects I tend to start with no-brainer split into `base`, `components`, and custom `utilities`.
 
-```css
+```scss
 @layer app {
   @layer base, components, utilities;
 }
@@ -670,7 +644,7 @@ When it comes to regular development, you should define layers you intend make s
 
 Here are some examples that help visualize the purpose of each group.
 
-```css
+```scss
 @layer app.base {
   .page {
     padding: 0 2rem 4rem;
@@ -704,7 +678,7 @@ Here are some examples that help visualize the purpose of each group.
 
 `@layer app.components { ... }` is meant to go into `<style>` of reusable components. Remember to drop the `scoped` and ensure components have unique classes to wrap the styles.
 
-```css
+```scss
 <style>
 @layer app.components {
   .my-sortable-list { ... }

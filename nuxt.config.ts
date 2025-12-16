@@ -106,6 +106,7 @@ export default defineNuxtConfig({
       },
       breakpoint: breakpoints.forTailwind,
     },
+    safelist: ['font-heading', 'font-body', 'font-mono'],
     shortcuts: {
       'text-h1': 'font-heading text-[6rem]     font-[300] leading-[1]     tracking-[-.015625em]',
       'text-h2': 'font-heading text-[3.75rem]  font-[300] leading-[1]     tracking-[-.0083333333em]',
@@ -144,7 +145,7 @@ export default defineNuxtConfig({
         },
       },
 
-      disableVuetifyStyles: true,
+      // disableVuetifyStyles: true,
       styles: {
         configFile: "assets/settings.scss",
       },
