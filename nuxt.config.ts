@@ -96,7 +96,6 @@ export default defineNuxtConfig({
         },
       },
 
-      disableVuetifyStyles: true,
       styles: {
         configFile: "assets/settings.scss",
       },

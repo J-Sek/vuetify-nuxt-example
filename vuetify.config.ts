@@ -30,9 +30,4 @@ export default defineVuetifyConfiguration({
       xxl: 2560,
     },
   },
-  defaults: {
-    VCode: {
-      class: "font-mono",
-    },
-  },
 });
