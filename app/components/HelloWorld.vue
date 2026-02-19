@@ -15,10 +15,9 @@
 
       <div class="flex flex-wrap gap-3">
         <v-card
-          class="py-4 sm:pr-[120px] w-full dark:bg-primary-800"
+          class="py-4 sm:pr-[120px] w-full dark:bg-primary-800 rounded-xl"
           color="surface-variant"
           image="https://cdn.vuetifyjs.com/docs/images/one/create/feature.png"
-          rounded="lg"
           variant="tonal"
         >
           <template #prepend>
@@ -46,13 +45,13 @@
           v-for="link in links" :key="link.href"
           :append-icon="mdiArrowTopRight"
           class="
-            sm:basis-[40%] flex-grow-1 h-[120px] flex items-center [&>.v-card-item]:w-full
-            dark:bg-linear-to-r dark:from-secondary-800 dark:to-secondary-600
+            rounded-xl
+            sm:flex-basis-[40%] flex-grow-1 h-[120px] flex items-center [&>.v-card-item]:w-full
+            dark:bg-linear-to-r dark:from-secondary dark:to-secondary/60
           "
           color="surface-variant"
           :href="link.href"
           rel="noopener noreferrer"
-          rounded="lg"
           :subtitle="link.subtitle"
           target="_blank"
           :title="link.title"

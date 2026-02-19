@@ -25,11 +25,11 @@
   "devDependencies": {
     "@mdi/js": "^7.4.47",
     "@nuxt/fonts": "^0.11.4",
-    "@unocss/preset-wind4": "^66.5.2",
     "lightningcss": "^1.30.2",
     "sass-embedded": "1.93.3",
     "typescript": "^5.8.3",
     "unocss": "^66.5.2",
+    "unocss-preset-vuetify": "^0.1.1",
     "vue-tsc": "^3.0.1",
     "vuetify-nuxt-module": "^0.18.7"
   }

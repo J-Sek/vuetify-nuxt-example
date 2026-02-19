@@ -1,0 +1,6 @@
+- [ ] switch to v4
+- [ ] ESLint plugin support to ban/replace `rounded`, `elevation`, `border` attributes in favor of CSS classes
+- [ ] verify/support themes
+- [ ] verify/support breakpoints
+- [ ] move typography to the preset (with a way to override)
+- [ ] possibility to opt-out from MD color pack

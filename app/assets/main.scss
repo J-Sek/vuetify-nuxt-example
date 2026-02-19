@@ -1,3 +1,9 @@
+:root {
+  --font-heading: 'Bricolage Grotesque', sans-serif;
+  --font-body: Sen, sans-serif;
+  --font-mono: 'Sometype Mono', monospace;
+}
+
 @layer vuetify.base {
   code, pre, .v-code {
     font-family: var(--font-mono);
