@@ -59,7 +59,11 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ["assets/main.scss"],
+  css: [
+    "assets/layers.css",
+    "vuetify/styles",
+    "assets/main.scss"
+  ],
   modules: [
     "@unocss/nuxt",
     "@nuxt/fonts",
@@ -86,11 +90,6 @@ export default defineNuxtConfig({
         ) as Record<string, string>,
       }),
     ],
-    layers: {
-      'uno.shortcuts': 0,
-      'uno.theme': 1,
-      'uno.utilities': 2,
-    },
     outputToCssLayers: {
       cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`
     },
@@ -109,6 +108,7 @@ export default defineNuxtConfig({
 
   vuetify: {
     moduleOptions: {
+      disableVuetifyStyles: true,
       // check https://nuxt.vuetifyjs.com/guide/server-side-rendering.html
       ssrClientHints: {
         reloadOnFirstRequest: false,
@@ -120,7 +120,7 @@ export default defineNuxtConfig({
         },
       },
 
-      // disableVuetifyStyles: true,
+      disableVuetifyStyles: true,
       styles: {
         configFile: "assets/settings.scss",
       },
