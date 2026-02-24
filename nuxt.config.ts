@@ -68,6 +68,17 @@ export default defineNuxtConfig({
   ],
 
   unocss: {
+    preflights: [
+      {
+        getCSS: () => `
+          :root {
+            --font-heading: 'Bricolage Grotesque', sans-serif;
+            --font-body: Sen, sans-serif;
+            --font-mono: 'Sometype Mono', monospace;
+          }
+        `,
+      }
+    ],
     presets: [
       presetVuetify({
         breakpoints: Object.fromEntries(
