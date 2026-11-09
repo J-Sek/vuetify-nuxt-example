@@ -28,6 +28,7 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#1867C0' },
       ],
       link: [
+        { rel: 'stylesheet', href: '/layers.css' },
         // { rel: 'manifest', href: '/manifest.webmanifest' },e
         { rel: 'apple-touch-icon', href: '/images/logo.png' },
         { rel: 'icon', type: 'image/svg+xml', href: '/images/logo.svg' },
@@ -60,8 +61,6 @@ export default defineNuxtConfig({
   },
 
   css: [
-    "assets/layers.css",
-    "vuetify/styles",
     "assets/main.scss"
   ],
   modules: [
@@ -108,7 +107,7 @@ export default defineNuxtConfig({
 
   vuetify: {
     moduleOptions: {
-      disableVuetifyStyles: true,
+      prefixComposables: ['useLayout'],
       // check https://nuxt.vuetifyjs.com/guide/server-side-rendering.html
       ssrClientHints: {
         reloadOnFirstRequest: false,
@@ -120,7 +119,6 @@ export default defineNuxtConfig({
         },
       },
 
-      disableVuetifyStyles: true,
       styles: {
         configFile: "assets/settings.scss",
       },
